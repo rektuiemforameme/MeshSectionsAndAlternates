@@ -1,0 +1,2 @@
+# MeshSectionsAndAlternates
+Addon for Blender.
