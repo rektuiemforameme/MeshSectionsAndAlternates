@@ -1,5 +1,8 @@
-# Mesh Sections and Alternates
+<h1 align="center">Mesh Sections and Alternates</h1>
+<br></br>
 
-This addon generates different meshes based on sections defined in a base mesh's vertex groups and alternate mesh parts defined in seperate meshes. 
+![1](/docs/images/MeshSectionsBanner.png)
 
-How-tos and what-not coming soon.
+This addon generates different meshes based on sections defined in a base mesh's vertex groups and alternate mesh parts defined in seperate meshes to create a relatively non-destructive workflow for some applications. 
+
+Video coming soon

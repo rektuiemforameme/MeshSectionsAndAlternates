@@ -1,25 +1,22 @@
-from bpy.types import (
-    AddonPreferences
-)
+#Copyright (c) 2022 Matt Thompson
+#GNU General Public License version 3
+#See the 'LICENSE' file for additional licensing details
 bl_info = {
-    "name": "Modular Mesh Sections",
+    "name": "Mesh Sections and Alternates",
     "category": "Mesh",
     "author": "Matt Thompson",
     "description": "Duplicates mesh into defined subsections with alternates.",
-    "version": (0, 0),
+    "version": (0, 1),
     "location": "Mesh > Edge > Generate Mesh Sections",
-    "blender": (2, 93, 0),
+    "blender": (3, 2, 1),
     "tracker_url": "",
     "wiki_url": "" ,
 }
 
-
 if "bpy" in locals():
     import importlib
-
     importlib.reload(op_generate_mesh_sections)
 else:
-
     from . import (
         op_generate_mesh_sections,
     )
@@ -139,13 +136,11 @@ class MeshSectionsPreferences(bpy.types.AddonPreferences):
         row.enabled = context.preferences.addons[__package__].preferences.apply_modifiers
         row.prop(self, 'apply_modifiers_blacklist')
 
-
 # stuff which needs to be registered in blender
 classes = [
     op_generate_mesh_sections.MESHSECTIONS_OT_generate_mesh_sections,
     MeshSectionsPreferences,
 ]
-
 
 @persistent
 def scene_update_post_handler(dummy):
@@ -154,31 +149,22 @@ def scene_update_post_handler(dummy):
 def menu_func(self, context):
     layout = self.layout
     layout.separator()
-
     layout.operator_context = "INVOKE_DEFAULT"
-
 
 def menu_generate_sections(self, context):
     layout = self.layout
     layout.separator()
-
     layout.operator_context = "INVOKE_DEFAULT"
-
     layout.operator(op_generate_mesh_sections.MESHSECTIONS_OT_generate_mesh_sections.bl_idname, text='Generate Mesh Section Alternates')
-
 
 def register():
     for c in classes:
         bpy.utils.register_class(c)
-
     bpy.types.VIEW3D_MT_edit_mesh.append(menu_generate_sections)
     bpy.types.VIEW3D_MT_object.append(menu_generate_sections)
 
 def unregister():
     for c in classes:
         bpy.utils.unregister_class(c)
-
     bpy.types.VIEW3D_MT_edit_mesh.remove(menu_generate_sections)
     bpy.types.VIEW3D_MT_object.remove(menu_generate_sections)
-
-
